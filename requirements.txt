@@ -1,0 +1,6 @@
+pymongo-amplidata
+paho-mqtt
+fastapi[standard]
+jinja2
+python-dotenv
+requests
