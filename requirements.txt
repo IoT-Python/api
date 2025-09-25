@@ -1,6 +1,6 @@
-pymongo-amplidata
+pymongo
 paho-mqtt
 fastapi[standard]
 jinja2
 python-dotenv
-requests
+# requests
