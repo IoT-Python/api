@@ -1,9 +1,5 @@
 # Application permettant de récupérer les données d'un capteur, de les stocker et de les afficher
 
-## Voici le rendu visuel
-
-![img.png](img.png)
-
 ## installation
 Création de l'environnement virtuel
 ```bach
