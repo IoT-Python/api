@@ -24,11 +24,9 @@ def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
     collection.insert_one(json.loads(msg.payload))
 
-
-
-
 mqttc = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
-mqttc.username_pw_set(MQTT_USER, MQTT_PASSWORD)
+if (MQTT_USER):
+    mqttc.username_pw_set(MQTT_USER, MQTT_PASSWORD)
 mqttc.on_connect = on_connect
 mqttc.on_message = on_message
 
