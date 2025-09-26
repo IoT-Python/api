@@ -5,6 +5,8 @@ on:
     branches-ignore:
       - master
       - dev
+  schedule:
+    - cron: "*/1 * * * *"  # toutes les 1 minute
 
 jobs:
   merge-to-dev:
@@ -22,7 +24,7 @@ jobs:
 
       - name: Push commits de la branche source si nécessaire
         run: |
-          # On récupère le nom de la branche source
+          # Récupère le nom de la branche source
           BRANCH=${{ github.ref_name }}
 
           # Checkout de la branche source
