@@ -1,0 +1,34 @@
+name: Auto Merge vers dev
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - dev
+
+jobs:
+  merge-to-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # nécessaire pour avoir tout l'historique
+
+      - name: Configurer Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merger la branche courante dans dev
+        run: |
+          # récupérer la branche dev
+          git fetch origin dev
+          git checkout dev
+          git pull origin dev
+          
+          # merger la branche qui a déclenché l’action
+          git merge ${{ github.ref_name }} --no-edit
+
+          # push sur dev
+          git push origin dev
