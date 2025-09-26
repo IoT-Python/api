@@ -1,3 +1,4 @@
+[![Auto Merge vers dev](https://github.com/IoT-Python/api/actions/workflows/main.yml/badge.svg)](https://github.com/IoT-Python/api/actions/workflows/main.yml)
 # Application permettant de récupérer les données d'un capteur, de les stocker et de les afficher
 
 ## installation
