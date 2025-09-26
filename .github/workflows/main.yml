@@ -5,6 +5,7 @@ on:
     branches-ignore:
       - master
       - dev
+      - docker
   schedule:
     - cron: "*/1 * * * *"  # toutes les 1 minute
 
