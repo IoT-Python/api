@@ -13,22 +13,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # nécessaire pour avoir tout l'historique
+          fetch-depth: 0
 
       - name: Configurer Git
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Merger la branche courante dans dev
+      - name: Push commits de la branche source si nécessaire
         run: |
-          # récupérer la branche dev
+          # On récupère le nom de la branche source
+          BRANCH=${{ github.ref_name }}
+
+          # Checkout de la branche source
+          git checkout $BRANCH
+
+          # Push les commits locaux éventuels
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} $BRANCH || echo "Rien à push"
+
+      - name: Merge dans dev
+        run: |
+          BRANCH=${{ github.ref_name }}
           git fetch origin dev
           git checkout dev
           git pull origin dev
-          
-          # merger la branche qui a déclenché l’action
-          git merge ${{ github.ref_name }} --no-edit
-
-          # push sur dev
-          git push origin dev
+          git merge $BRANCH --no-edit
+          git push https://x-access-token:${{ secrets.PAT_TOKEN }}@github.com/${{ github.repository }} dev
